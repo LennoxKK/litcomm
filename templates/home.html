@@ -1,0 +1,82 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+        body,html{
+            height:100%;
+            margin:0;
+            padding:0;
+            font-family: arial;
+        }
+        h1{
+            font: size 70px;
+            text-transform: uppercase;
+            margin: 0;
+
+        }
+        h1 sapn{
+           color:crimson;
+        }
+        .banner1-img{
+            background:url("static/img/libra1.jpg");
+            --webkit-background-size: cover;
+            background-repeat:no-repeat;
+            background-position: center center;
+            height: 100%;
+        }
+        .banner1-text{
+            position: absolute;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            z-index:5;
+            width:45%;
+            padding:40px 0;
+            text-align:center;
+            border-top-left-radius: 70px;
+            border-bottom-right-radius: 70px;
+            background-color: rgba(0,0,0,0.3);
+            color:#fff;
+            font-weight: bold;
+            border:10px inset #fff;
+
+        }
+        .banner1-text p{
+            padding:0;
+            font-family:merienda;
+
+        }
+        a{
+            display:inline-block;
+            padding:10px  50px;
+            border:2px solid #fff;
+            font-size:18px;
+            text-decoration: none;
+            color:#fff;
+            margin-top: 15px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="banner1-img"></div>
+    <div class="banner1-text">
+        <h1>Lit<span>Com</span></h1>
+        <p> Welcome to Literature Bay; the home of all time readers,We lend books sell some stationeries 
+            just to make sure our readers have the right facilities to enhance their reading culture.
+    </p>
+                <a href="/popular" >LATEST</a>
+                <a href="/book_status">Member List</a>
+                <a href="/u_books">BOOKS</a>
+                <a href="/adminlogin">Admin</a>
+                <a href="/p_description">Products</a>
+                <a href="/contact">Contact Us</a>
+    </div>
+</body>
+</html>

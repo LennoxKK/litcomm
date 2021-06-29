@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>|LITERATURE BAY</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Search results here</h2>
+  <p>The Search result for books</p>            
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>TITLE</th>
+		<th>book id</th>
+		<th>Author</th>
+		<th>Book status</th>
+		<th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for book in result%}
+        <tr>
+        <td>{{book.book_name}}</td>
+        <td>{{book.book_id}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.status}}</td>
+        <td>{{book.book_descrption}}</td>
+        <td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="container">
+<p>The Search result for Products</p>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product id</th>
+		<th>Name</th>
+		<th>Price $</th>
+		<th>Description</th>
+		<th>Category</th>
+		<th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in result2%}
+        <tr>
+        <td>{{p.product_id}}</td>
+        <td>{{p.product_name}}</td>
+        <td>{{p.product_price}}</td>
+        <td>{{p.product_description}}</td>
+        <td>{{p.Product_category}}</td>
+            
+        <td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

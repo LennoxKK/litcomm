@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://kit.fontawesome.com/a076d05399.js"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+   <style>
+       
+       @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+        *{
+            margin:0px;
+            padding:0px;
+            box-sizing: border-box;
+            text-decoration: none;  
+            font-family: 'Odibee Sans', sans-serif;
+        }
+body{
+    max-width: 1400px;
+    background-color: rgb(240, 163, 240);
+}
+/*navbar styling*/
+.max-width{
+    max-width:100%;
+    padding:0 80px;
+    margin:auto;
+}
+.navbar{
+    position :relative;
+    top: -120px;
+    width:100%;
+    padding:0 15 px;
+    background: crimson;
+    font-family:'Squada',sans-serif;
+    transition: all 0.3s ease;
+}
+.navbar .sticky{
+    padding:15px 0;
+    background:crimson;
+}
+/*menu btn styling*/
+.menu-btn{
+    color: wheat;
+    font-size: 20px;
+    cursor:pointer;
+}
+.navbar .max-width{
+    display:flex;
+    align-items: center;
+    font-weight:600;
+    justify-content: space-between;
+}
+.navbar .logo a{
+    position: relative;
+    font-size:35px;
+    font-weight:600;
+    color:#fff;
+}
+.navbar .logo a span{
+    color:crimson;
+}
+.navbar .menu li{
+    position: relative;
+    right: 40%;
+    list-style:none;
+    display:inline-block;
+}
+.navbar .menu li a{
+    position: relative;
+    color:#fff;
+    font-size:18px;
+    font-weight:500;
+    margin-left:25px;
+    transition:color 0.5s ease;
+}
+.navbar .menu li a:hover{
+    color:rgb(77, 8, 167);
+}
+/*home sectio styling */
+.home{
+    display :flex;
+    background:transparent;
+    height:100vh;
+    color:rgb(27, 22, 22);
+    min-height: 500px;
+    font-family:'Squada',sans-serif ;
+}
+.home .max-width{
+    margin:auto 0 auto 40px;
+}
+.home .home-content{
+    position: relative;
+    left:30px;
+    top:-300px;
+    text-transform: lowercase;
+}
+.home .home-content .text-1{
+    font-size: 27px;
+}
+.home .home-content .text-2{
+    font-size: 50px;
+    font-weight:600;
+    margin-left:-3px;
+
+}
+.home .home-content .text-3{
+    font-size: 40px;
+    margin:5px 0;
+}
+.home .home-content .text-3 span{
+    color:crimson;
+    font-weight: 500;
+}
+.dropbtn {
+    position: relative;
+    top: -9px;
+    color:#fff;
+    font-size:18px;
+    font-weight:500;
+    margin-left:25px;
+    background-color: crimson;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  position:relative;
+  top:5px;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: transparent;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: blue;
+  border-radius: 5px;
+}
+.jumbotron{
+    background:rgb(193, 193, 236);
+    position: relative;
+    top: -60px;;
+}
+.jumbotron h1{
+    position: relative;
+    top: 10px;
+    text-align: center;
+}
+
+.row{
+    display:flex ;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+    position:relative;
+    left:30px;
+}
+.col-2 img{
+    position: relative;
+    height: 500px;
+    width: 300px;
+    right:100px;
+    min-width:0%;
+    padding: 0px 0;
+}
+p{
+    width: 50%;
+}
+
+/*searchbutton*/
+
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  position: relative;
+  left: 120%;
+  top:-50%;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  position: relative;
+  left: 100%;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+   </style>
+    
+</head>
+<body>
+    <div class="jumbotron"><h1>LITERATURE BAY</h1></div>
+    <nav class="navbar">
+        <div class="max-width">
+            <ul class="menu">
+                <li><a href="/home">Home </a></li>
+                <li><a href="/p_description">Products</a></li>
+                <li><a href="/u_books">Books</a></li>
+                <li><a href="/">Accounts</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/adminlogin">Admin</a></li>
+                <div class="form-group">
+                </div>
+
+            </ul>
+            <div class="dropdown" style="float:right;position:relative;right: 35%;">
+                <button class="dropbtn">USER</button>
+                <div class="dropdown-content">
+                <a href="/popular" >LATEST</a>
+                <a href="/book_status">MEMBER LIST</a>
+                <a href="/u_books">BOOKS</a>
+               
+              </div>
+            </div>
+              
+        </div>
+
+    </nav>
+    <div>
+        <form class="example" method="POST" action="/search" style="margin:auto;max-width:200px; position: relative;top: -194px;left: 20%;">
+            <input type="text" placeholder="Search.." name="search2">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+      </div>
+    <!-- Warning for deleting a user or a book-->
+    <!--one must login as an adimin whenever he or she presses the admin button-->
+ </body>
+</html>

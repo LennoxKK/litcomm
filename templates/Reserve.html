@@ -1,0 +1,29 @@
+{% extends 'layout.html'%}
+{% block content %}
+
+<link rel="stylesheet" href="static/style.css">
+<div class="container w-50">
+    <form method="post",action="POST">
+      {{form.hidden_tag()}}
+        <fieldset>
+            <legend class="border-bottom mb-4">Reserve</legend>
+            <table>
+                <div class="form-group" >
+                    {{form.book_id.label(class="form-control-label")}}
+                    {% if form.book_id.errors%}
+                    {{form.book_id(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.book_id.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{form.book_id(class="form-control form-control-lg is invalid")}}
+                    {% endif %}             
+                </div>
+            </table>
+            </fieldset>
+            <div class=" field-group mt-4" >
+                {{form.submit(class='btn btn-primary')}}
+           </div>
+
+    </form>
+{% endblock%}

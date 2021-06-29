@@ -1,0 +1,113 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" href="static/style.css">
+
+<div class="container w-50" >
+
+    <div class="div-id">
+        {% with messages = get_flashed_messages(with_categories=true)%}
+        
+           {% if messages %}
+                {% for category,message in messages %}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+                {% endfor %}
+           {% endif %}
+        {% endwith %}
+    </div>
+    <form method="POST",action="{{url_for('buy_product')}}">
+        {{form.hidden_tag()}}
+        <fieldset>
+            <legend class="border-bottom mb-4">Add to basket</legend>
+            <table>
+                <div class="form-group" >
+                    {{form.p_id.label(class="form-control-label")}}
+                    {% if form.p_id.errors%}
+                    {{form.p_id(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.p_id.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.p_id(class="form-control form-control-lg is invalid")}}
+                    {% endif %}             
+                </div>
+                <div class="form-group">
+                    {{form.customer_name.label(class="form-control-label")}}
+                    {% if form.customer_name.errors%}
+                    {{form.customer_name(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.customer_name.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.customer_name(class="form-control form-control-lg is invalid")}}
+                
+                    {% endif %}             
+                </div>
+                <div class="form-group">
+                    {{form.phone.label(class="form-control-label")}}
+                    {% if form.phone.errors%}
+                    {{form.phone(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.phone.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.phone(class="form-control form-control-lg is invalid")}}
+                
+                    {% endif %}             
+                </div>
+                <div class="form-group">
+                    {{form.email.label(class="form-control-label")}}
+                    {% if form.email.errors%}
+                    {{form.email(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.email.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.email(class="form-control form-control-lg is invalid")}}
+                
+                    {% endif %}             
+                
+            </div>
+            <div class="form-group">
+                {{form.items.label(class="form-control-label")}}
+                {% if form.items.errors%}
+                {{form.items(class="form-control form-control-lg is invalid")}}
+                    {% for error in form.items.errors%}
+                        <span>{{error}}</span>
+                    {% endfor%}
+                {% else %}
+                    {{form.items(class="form-control form-control-lg is invalid")}}
+                {% endif %}             
+            </div>
+            <div class="form-group">
+                {{form.method.label(class="form-control-label")}}
+                {% if form.method.errors%}
+                {{form.method(class="form-control form-control-lg is invalid")}}
+                    {% for error in form.method.errors%}
+                        <span>{{error}}</span>
+                    {% endfor%}
+                {% else %}
+                    {{form.method(class="form-control form-control-lg is invalid")}}
+                {% endif %}             
+            </div>
+            <div class="form-group">
+                {{form.customer_id.label(class="form-control-label")}}
+                {% if form.customer_id.errors %}
+                {{form.customer_id(class="form-control form-control-lg is invalid")}}
+                    {% for error in formcustomer_id.errors%}
+                        <span>{{error}}</span>
+                    {% endfor%}
+                {% else %}
+                    {{form.customer_id(class="form-control form-control-lg is invalid")}}
+                {% endif %}             
+            </div>
+        </fieldset>
+                   <div class=" field-group mt-4" >
+                        {{form.submit(class='btn btn-primary')}}
+                   </div>
+
+    </form>
+</div>
+{% endblock %}

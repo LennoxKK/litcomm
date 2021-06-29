@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style = "color:hsl(240, 100%, 50%);box-shadow: 12pt;">LITERATURE BAY</title>
+
+    <style>
+      *{
+        font-size: 16px;
+      }
+        footer{
+            position: relative;
+            bottom:-200px;
+            }
+        .div-id{
+            width: 200px;
+            position: relative;
+            left:40%;
+            top:230px;
+        }
+    </style>
+     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+</head>
+<body>
+    <div class="div-id">
+        {% with messages = get_flashed_messages(with_categories=true)%}
+        
+           {% if messages %}
+                {% for category,message in messages %}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+                {% endfor %}
+           {% endif %}
+        {% endwith %}
+    </div>
+    <div>
+        <!-- WHERE TO ADD THE BLOCKS-->
+
+        <div>{% include 'includes/_navbar.html' %}</div>
+        
+        {% block content %}
+        {% endblock %}
+            <footer class="bg-light text-center text-white w-100%">
+                <!-- Grid container -->
+                <div class="container p-4 pb-0">
+                  <!-- Section: Social media -->
+                  <section class="mb-4">
+                    <!-- Facebook -->
+                    <a
+                      class="btn btn-primary btn-floating m-1"
+                      style="background-color: #3b5998;"
+                      href="#!"
+                      role="button"
+                      ><i class="fab fa-facebook-f"></i
+                    ></a>
+              
+                    <!-- Twitter -->
+                    <a
+                      class="btn btn-primary btn-floating m-1"
+                      style="background-color: #55acee;"
+                      href="#!"
+                      role="button"
+                      ><i class="fab fa-twitter"></i
+                    ></a>
+              
+                    <!-- Google -->
+                    <a
+                      class="btn btn-primary btn-floating m-1"
+                      style="background-color: #dd4b39;"
+                      href="#!"
+                      role="button"
+                      ><i class="fab fa-google"></i
+                    ></a>
+              
+                    <!-- Instagram -->
+                    <a
+                      class="btn btn-primary btn-floating m-1"
+                      style="background-color: #ac2bac;"
+                      href="#!"
+                      role="button"
+                      ><i class="fab fa-instagram"></i
+                    ></a>
+              
+                    <!-- Linkedin -->
+                    <a
+                      class="btn btn-primary btn-floating m-1"
+                      style="background-color: #0082ca;"
+                      href="#!"
+                      role="button"
+                      ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <!-- Github -->
+                    <a
+                      class="btn btn-primary btn-floating m-1"
+                      style="background-color: #333333;"
+                      href="#!"
+                      role="button"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                  </section>
+                  <!-- Section: Social media -->
+                </div>
+                <!-- Grid container -->
+              
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                  © 2020 Copyright:
+                  <a class="text-white" href="https://mdbootstrap.com/"><LITCom class="KE"></LITCom></a>
+                </div>
+                <!-- Copyright -->
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
+    <script type="text/javascript"> CKEDITOR.replace('editor') </script>
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(function (){
+        $(".div-id").load("navbar.html")
+    })
+</script>

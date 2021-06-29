@@ -1,0 +1,76 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" href="static/style.css">
+<div class="container w-50">
+    <form method="post",action="POST">
+        {{form.hidden_tag()}}
+        <fieldset>
+            <legend class="border-bottom mb-4">Add</legend>
+            <table>
+                <div class="form-group">
+                    {{form.p_id.label(class="form-control-label")}}
+                    {% if form.p_id.errors%}
+                    {{form.p_id(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.p_id.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.p_id(class="form-control form-control-lg is invalid")}}
+                    {% endif %}
+                </div>
+    
+                <div class="form-group">
+                    {{form.p_name.label(class="form-control-label")}}
+                    {% if form.p_name.errors%}
+                    {{form.p_name(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.p_name.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.p_name(class="form-control form-control-lg is invalid")}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.p_description.label(class="form-control-label")}}
+                    {% if form.p_description.errors%}
+                    {{form.p_description(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.p_descpription.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.p_description(class="form-control form-control-lg is invalid")}}
+                    {% endif %}             
+                </div>
+                <div class="form-group">
+                    {{form.price.label(class="form-control-label")}}
+                    {% if form.price.errors%}
+                    {{form.price(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.price.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.price(class="form-control form-control-lg is invalid")}}
+                    {% endif %}             
+                </div>
+                <div class="form-group">
+                    {{form.p_category.label(class="form-control-label")}}
+                    {% if form.p_category.errors%}
+                    {{form.p_category(class="form-control form-control-lg is invalid")}}
+                        {% for error in form.p_category.errors%}
+                            <span>{{error}}</span>
+                        {% endfor%}
+                    {% else %}
+                        {{form.p_category(class="form-control form-control-lg is invalid")}}
+                    {% endif %}
+                </div>
+            </table>
+           
+        </fieldset>
+                   <div class=" field-group mt-4" >
+                        {{form.submit(class='btn btn-primary')}}
+                   </div>
+
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'layout.html'%}
+{% block content%}
+{% if session.name=="loggedin" %}
+<p>You are Registered {{ session.name }} <a href="/logout">logout</a>.</p> 
+{% else %}
+ <p style="
+  position:relative;
+   top:-70px;text-align: center; 
+   left:20%; 
+   font-size: 20px;"> 
+   <a href="/login" style="color: blue;">LOGIN</a>.</p>
+  <p style="
+  position:relative;
+   top:-70px;text-align: center; 
+   left:20%; 
+   font-size: 20px;"><a href="/register" style="color: blue;">REGISTER</a>.</p>
+    <p style="
+    position:relative;
+     top:-70px;text-align: center; 
+     left:20%; 
+     font-size: 20px;"><a href="/adminlogin" action="/adminlogin" style="color: blue;">ADMIN LOGIN</a>.</p>
+{% endif %}
+{% endblock %}

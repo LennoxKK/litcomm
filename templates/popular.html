@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: sans-serif;
+        }
+        input{
+            display:none;
+        }
+        .container{
+            width: 100%;
+            text-align:center;
+        }
+        h1{
+            font-size: 35px;
+            font-weight: normal;
+            position: relative;
+            margin:40px 0;
+
+        }
+        h1::before{
+            content:"";
+            position:absolute;
+            width:100px;
+            height:3px;
+            background-color:crimson;
+            bottom:-10px;
+            left:50%;
+            transform:translateX(-50%);
+            animation: animate 4s linear infinite;
+        }
+        @keyframes animate{
+            0%{
+                width:100px;
+            }
+            50%{
+                width:200px;
+            }
+            100%{
+                width:100px;
+            }
+        }
+        .top-content{
+            background-color:rgb(243,243,243);
+            width:90%;
+            margin:0 auto 20px auto;
+            height:60px;
+            display:flex;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow:3px 3px 5px lightgray;
+        }
+        h3{
+            height:100%;
+            background-color:rgb(221,221,221);
+            line-height: 60px;
+            padding:0 50px;
+            color:white;
+        }
+        label{
+            display:inline-block;
+            height:100%;
+            margin:0 20px;
+            line-height: 60px;
+            font: size 18px;
+            color:gray;
+            cursor: pointer;
+            transition: color 5s;
+        }
+        label:hover{
+            color: rgb(228, 39, 39);
+        }
+        .photo-gallery{
+            width:90%;
+            margin:auto;
+            display:grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-gap:60px;
+        }
+        .pic{
+            position:relative;
+            height:230px;
+            border-radius: 10px;
+            box-shadow:3px 3px 5px lightgray;
+            cursor: pointer;
+            transition: .5s;
+        }
+        .pic img{
+            width:100%;
+            height:100%;
+            border-radius: 10px;
+            transition:.5s;
+        }
+        .pic::before{
+            content: "photo gallery";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color:white;
+            font-size: 25px;
+            font-weight: bold;
+            width:100%;
+            margin-top: -100px;
+            opacity:0;
+            transition:.3s;
+            transition-delay: .2s;
+            z-index:1;
+        }
+
+        .pic:after{
+            content:'';
+            position: absolute;
+            width:100%;
+            bottom:0;
+            left:0;
+            border-radius:10px;
+            height:0%;
+            background-color:rgba(0,0,0,.4);
+            transition:.3s;
+        }
+        .pic:hover::after{
+            height: 100%;
+        }
+        .pic:hover::before{
+            margin-top: 0;
+            opacity: 1;
+        }
+        #check1:checked ~ .container .photo-gallery .pic{
+            opacity: 1;
+            transform:scale(1);
+            position: relative;
+            transition: .5s;
+
+        }
+        #check2:checked ~ .container .photo-gallery .pen{
+            opacity: 1;
+            transform:scale(1);
+            position: relative;
+        }
+        #check2:checked ~ .container .photo-gallery .diary,
+        #check2:checked ~ .container .photo-gallery .sticky{
+            opacity: 0;
+            transform:scale(0);
+            position: absolute;
+            transition: 0s;
+        }
+        #check3:checked ~ .container .photo-gallery .diary{
+            opacity: 1;
+            transform:scale(1);
+            position: relative;
+        }
+        #check3:checked ~ .container .photo-gallery .pen,
+        #check3:checked ~ .container .photo-gallery .sticky{
+            opacity: 0;
+            transform:scale(0);
+            position: absolute;
+            transition: 0s;
+        }
+        #check4:checked ~ .container .photo-gallery .sticky{
+            opacity: 1;
+            transform:scale(1);
+            position: relative;
+        }
+        #check4:checked ~ .container .photo-gallery .pen,
+        #check4:checked ~ .container .photo-gallery .diary{
+            opacity: 0;
+            transform:scale(0);
+            position: absolute;
+            transition: 0s;
+        }
+        .dropbtn {
+    position: relative;
+    top: -9px;
+    color:#fff;
+    font-size:18px;
+    font-weight:500;
+    margin-left:25px;
+    background-color: crimson;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  position:relative;
+  top:5px;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: transparent;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: blue;
+  border-radius: 5px;
+}
+
+/* Modal styles */
+.modal .modal-dialog {
+		max-width: 400px;
+	}
+	.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+		padding: 20px 30px;
+	}
+	.modal .modal-content {
+		border-radius: 3px;
+	}
+	.modal .modal-footer {
+		background: #ecf0f1;
+		border-radius: 0 0 3px 3px;
+	}
+    .modal .modal-title {
+        display: inline-block;
+    }
+	.modal .form-control {
+		border-radius: 2px;
+		box-shadow: none;
+		border-color: #dddddd;
+	}
+	.modal textarea.form-control {
+		resize: vertical;
+	}
+	.modal .btn {
+		border-radius: 2px;
+		min-width: 100px;
+	}	
+	.modal form label {
+		font-weight: normal;
+	}	
+    
+
+    </style>
+    <script>
+        $(document).ready(function(){
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+            
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            $("#selectAll").click(function(){
+                if(this.checked){
+                    checkbox.each(function(){
+                        this.checked = true;                        
+                    });
+                } else{
+                    checkbox.each(function(){
+                        this.checked = false;                        
+                    });
+                } 
+            });
+            checkbox.click(function(){
+                if(!this.checked){
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        });
+        
+        $(document).on("click", ".deleteIcon", function() {
+        
+        var indexDelAgent = $(this).index('.deleteIcon') + 1;
+        console.log("after deletion");
+        console.log(indexDelAgent);
+        
+        document.getElementById("tempTable").deleteRow(indexDelAgent);
+        
+        });</script>
+</head>
+<body>
+    <input type="radio" name="photos" id="check1" checked>
+    <input type="radio" name="photos" id="check2">
+    <input type="radio" name="photos" id="check3">
+    <input type="radio" name="photos" id="check4">
+    <div class="container">
+        <h1>OUR PRODUCTS HERE, WELCOME!</h1>
+        <div class="top-content">
+            <h3>Photo gallery</h3>
+            <label for="check1">All BOOKS</label>
+            <label for="check2">POETRY</label>
+            <label for="check3">Novels</label>
+            <label for="check4">Journals</label>
+        </div>
+
+        <div class="photo-gallery">
+            <div class="pic pen">
+                <img src="static/img/background.jpg">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>POETRY BOOK</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+            <div class="pic diary">
+                <img src="static/img/libra1.jpg">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>Short story</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+           <div class="pic diary">
+                <img src="static/img/inward.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>Novel</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+            <div class="pic sticky">
+                <img src="static/img/poetry.jpg">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>POEMS</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+            <div class="pic sticky">
+                <img src="static/img/best.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>POETRY BOOK</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+           <div class="pic pen">
+                <img src="static/img/holybible.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>POETRY BOOK</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+            <div class="pic diary">
+                <img src="static/img/poetry.jpg">
+                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>POETRY BOOK</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+            <div class="pic sticky">
+                <img src="static/img/life.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>LIFE BOOK</p>
+                    <p><a href="#">BUY  .</a>$400.00</p>
+            </div>
+            <div class="pic pen">
+                <img src="static/img/life.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>LIFE</p>
+                    <p><a href="#">BUY  .</a>{{price}}</p>
+            </div>
+            <div class="pic pen">
+                <img src="static/img/life.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>LIFE</p>
+                    <p><a href="#">BUY  .</a>{{price}}</p>
+            </div>
+            <div class="pic pen">
+                <img src="static/img/life.png">
+                <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
+                    ></i>description  .</a>LIFE</p>
+                    <p><a href="#">BUY  .</a>{{price}}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Drop down descrption-->
+  <!-- Delete Modal HTML -->
+	<div id="description" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">description</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+                        <p>{{description}}</p>					
+						<p>Aouthor:  John Aour</p>
+                        <p>Also the same Aouthor of Ringing bells</p>
+                        <p>published: 2019 @DBG publishers</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

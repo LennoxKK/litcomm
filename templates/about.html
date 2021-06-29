@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+        *{
+            margin:0px;
+            padding:0px;
+            box-sizing: border-box;
+            font-family: 'Odibee Sans', sans-serif;
+        }
+        .section{
+            width: 100px;
+            min-height: 100vh;
+            background-color: #ddd;
+        }
+        .containera{
+            width:80%;
+            display: block;
+            margin:auto;
+            padding-top: 100px;
+
+        }
+        .content-section{
+            float:left;
+            width:55%;
+
+        }
+        .image-section{
+            float:right;
+            width:40%;
+        }
+        .content-section img{
+            width: 100%;
+            height:auto;
+
+        }
+        .content-section title{
+            text-transform: uppercase;
+            font-size:28px;
+        }
+        .content-section .content h3 {
+            margin-top:20px;
+            color: #5d5d5d;
+        }
+        </style>
+    <body>
+    <div class="section">
+        <div class="containera">
+            <div class="content-section">
+                <div class="title">
+                    <h1>About Us</h1>
+                    <div class="conet">
+                        <h3>Helo you all welcome to y new website take a servey please</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Quod atque inventore provident neque obcaecati nostrum reiciendis eius voluptatibus 
+                            eos officia in ducimus illo eligendi, explicabo doloribus aperiam officiis. 
+                            Tenetur, nam!</p>
+                            <div class="button">
+                                <a href="" >Read More</a>
+                            </div>
+                            <div class="social">
+                                <a href="" ><i class="fab fa-facebook-f"></i></a>
+                                <a href="" ><i class="fab fa-twitter"></i></a>
+                                <a href="" ><i class="fab fa-instagram"></i></a>
+                            </div>
+                    </div>
+                    <div class="image-section">
+                        <img src="static/img/best.png" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content%} 
+ </div  class="container w-50">
+    <form method="post",action="/home">
+        {{form.hidden_tag()}}
+        <fieldset>
+            <legend class="border-bottom mb-4">Comment</legend>
+                <div class="form-group" style="width: 500px;box-sizing:border-box;">
+                    {{form.message.label(class="form-control-label")}}
+                    {{form.message(class="form-control form-control-lg is invalid")}}
+                </div>
+                <div class="field-group mt-4" >
+                    {{form.submit(class='btn btn-primary')}}
+               </div>
+        </fieldset>
+    </form>
+   
+</div>
+{% endblock%}

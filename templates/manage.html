@@ -1,0 +1,79 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            *{
+                box-sizing:border-box;
+            }
+            body,html{
+                height:100%;
+                margin:0;
+                padding:0;
+                font-family: arial;
+            }
+            h1{
+                font: size 70px;
+                text-transform: uppercase;
+                margin: 0;
+    
+            }
+            .banner-img{
+                background:url("static/img/libra1.jpg");
+                --webkit-background-size: cover;
+                background-repeat:no-repeat;
+                background-position: center center;
+                height: 100%;
+            }
+            .banner-text{
+                position: absolute;
+                top: 50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+                z-index:5;
+                width:45%;
+                padding:40px 0;
+                text-align:center;
+                border-top-left-radius: 70px;
+                border-bottom-right-radius: 70px;
+                background-color: rgba(0,0,0,0.3);
+                color:#fff;
+                font-weight: bold;
+                border:10px inset #fff;
+    
+            }
+            .banner-text p{
+                padding:0;
+                font-family:merienda;
+    
+            }
+            a{
+                display:inline-block;
+                padding:10px  50px;
+                border:2px solid #fff;
+                font-size:18px;
+                text-decoration: none;
+                color:#fff;
+                margin-top: 15px;
+    
+            }
+        </style>
+    </head>
+    <body>
+        <div class="banner-img"></div>
+        <div class="banner-text">
+            <h1>Litcom</h1>
+            <h1>Welcome admin</h1>
+            <p>Lorem ipsum dolor sit amet, 
+                consectetur adipisicing elit. Voluptas, dolorem modi quod ad tempore
+                 aspernatur vero temporibus at sequi possimus, laborum odio nam facere ducimus 
+                 placeat id est! Quasi, ea!</p>
+                 <a href="/issue">Issues</a>
+                 <a href="/books">Books</a>
+                 <a href="/Users">Members</a>
+                 <a href="/products">Products</a>
+        </div>
+    </body>
+    </html>
