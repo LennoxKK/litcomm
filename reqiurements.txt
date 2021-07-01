@@ -1,8 +1,0 @@
-flask
-flask_mysqldb
-flask_wtf
-wtforms
-email-validator
-werkzeug.security
-flask_login
-psycopg2

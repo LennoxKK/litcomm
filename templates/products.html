@@ -1,3 +1,6 @@
+{% extends 'layout.html' %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -268,7 +271,7 @@ $(document).ready(function(){
 <div id="deleteProduct" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-            <form method="POST" action="/product">
+            <form method="POST" action="/pruduc_delete">
                 <div class="modal-header">						
                     <h4 class="modal-title">Delete product</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -355,16 +358,16 @@ $(document).ready(function(){
 								<label for="checkbox1"></label>
 							</span>
 						</td>
-						<td>{{p.product_id}}</td>
+						<td>{{p.roduct_id}}</td>
                        
                         <td>{{p.product_name}}</td>
                         <td>{{p.product_price}}</td>
-                        <td>{{p.product_description}}</td>
-						<td>{{p.Product_category}}</td>
+                        <td>{{p.product_description }}</td>
+						<td>{{p.product_category}}</td>
                         
                         <td>
-							<a href="#editProduct" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-							<a href="#deleteProduct" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							<a href="#editProduct" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">E</i></a>
+							<a href="#deleteProduct" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">D</i></a>
 						</td>
 					</tr>
                     {% endfor%}
@@ -394,8 +397,8 @@ $(document).ready(function(){
                 <div class="modal-header">
                     <h4 class="modal-title">Add product</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">					
+                </div>	
+				<div class="modal-body">
                     <div class="form-group">
                         <label>product_id</label>
                         <input type="text" name="product_id" class="form-control" required>
@@ -440,7 +443,6 @@ $(document).ready(function(){
                         <label>product id</label>
                         <input type="text" name="product_id" class="form-control" required>
                     </div>
-                <div class="modal-body">
                     <div class="form-group">
                         <label>product name</label>
                         <input type="text" name="product_name" class="form-control" required>
@@ -469,3 +471,4 @@ $(document).ready(function(){
 
 </body>
 </html>
+{% endblock %}

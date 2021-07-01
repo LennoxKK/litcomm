@@ -12,17 +12,14 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 
 #Login system
-from flask_login import LoginManager,login_required,UserMixin
+
 
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_session import Session
 from wtforms.fields.core import DateField, DecimalField
 from wtforms.widgets.core import Select
 app = Flask(__name__)
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+
 # Sending emails
 import smtplib
 
@@ -36,9 +33,9 @@ app = Flask(__name__)
 # secret key
 app.config["SECRET_KEY"]='lejshjsjbkc'
 app.config['MYSQL_HOST']='localhost'
-app.config['MYSQL_USER']='lib_user'
-app.config['MYSQL_PASSWORD']='@lib_user'
-app.config['MYSQL_DB']='Library'
+app.config['MYSQL_USER']='admin'
+app.config['MYSQL_PASSWORD']='lkk99@LKK99'
+app.config['MYSQL_DB']='library'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql=MySQL(app)
@@ -83,7 +80,7 @@ class Reminder(FlaskForm):
     submit = SubmitField('send')
     search = SubmitField('search')
 
-class loginform(UserMixin,FlaskForm):
+class loginform(FlaskForm):
     email=StringField("Email",validators=[
         InputRequired('username is required'),Email()
         ])
@@ -294,7 +291,7 @@ def show_books_users():
 #Display the members
 @app.route('/Users',methods=['GET','POST'])
 def Manage_Members():
-        query = "SELECT* FROM Members"
+        query = "SELECT* FROM members"
         cur=mysql.connection.cursor()
         cur.execute(query)
         members=cur.fetchall()
@@ -341,7 +338,11 @@ def reminder():
 #update book details
 @app.route('/update',methods=['GET','POST'])
 def update_book():
-    if request.method=="POST":
+    cur=mysql.connection.cursor()
+    id=["'{}'".format(request.form['book_id']),]
+    cur.execute("SELECT * FROM books WHERE book_id=%s",id)
+    book=cur.fetchall()
+    if request.method=="POST" and book:
         cur=mysql.connection.cursor()
         id="'{}'".format(request.form['book_id'])
         #Update the book_name
@@ -373,6 +374,7 @@ def update_book():
         return redirect(url_for("show_books"))
     else:
         flash(f'Object not found! Check the id and corrrect it',category="success")
+        return redirect(url_for("show_books"))
 
 
 
@@ -380,28 +382,30 @@ def update_book():
 #UPDATE PRODUCT DETAILS
 @app.route('/update_product',methods=['GET','POST'])
 def update_product():
-    if request.method=="POST":
-        cur=mysql.connection.cursor()
-        data=[request.form['product_id'],]
-        id="'{}'".format(data[0])
+    cur=mysql.connection.cursor()
+    data=[request.form['product_id'],]
+    id="'{}'".format(data[0])
+    cur.execute("select * from products where roduct_id=%s",data)
+    product=cur.fetchall()
+    if request.method=="POST" and product:
         #Update the member_name
         product_name=[request.form['product_name'],]
-        cur.execute("update products set product_name=%s WHERE product_id="+id,product_name)
+        cur.execute("update products set product_name=%s WHERE roduct_id="+id,product_name)
         mysql.connection.commit()
 
         #Update the member_phone
         product_description=[request.form['product_description'],]
-        cur.execute("update products set product_description=%s WHERE product_id ="+id,product_description)
+        cur.execute("update products set product_description=%s WHERE roduct_id="+id,product_description)
         mysql.connection.commit()
 
         #update the description
         product_category=[request.form['category'],]
-        cur.execute("update products set product_category=%s  WHERE product_id ="+id,product_category)
+        cur.execute("update products set product_category=%s  WHERE roduct_id ="+id,product_category)
         mysql.connection.commit()
 
         #UPDATE PRODUCT PRICE
         product_price=[request.form['price'],]
-        cur.execute("update products set product_price=%s  WHERE product_id ="+id,product_price)
+        cur.execute("update products set product_price=%s  WHERE roduct_id ="+id,product_price)
         mysql.connection.commit()
 
         cur.close()
@@ -409,7 +413,7 @@ def update_product():
         return redirect(url_for("display_products"))
     else:
         flash(f'Object not found! Check the id and corrrect it',category="success")
-        return render_template('products.html')
+        return redirect(url_for("display_products"))
 
 
 
@@ -417,7 +421,12 @@ def update_product():
 #update book details
 @app.route('/update_member',methods=['GET','POST'])
 def update_member():
-    if request.method=="POST":
+    cur=mysql.connection.cursor()
+    data=[request.form['member_id'],]
+    id="'{}'".format(data[0])
+    cur.execute("SELECT* FROM members WHERE member_id=%s",data)
+    member=cur.fetchall()
+    if request.method=="POST" and member:
         cur=mysql.connection.cursor()
         data=[request.form['member_id'],]
         id="'{}'".format(data[0])
@@ -441,11 +450,15 @@ def update_member():
         return redirect(url_for("Manage_Members"))
     else:
         flash(f'Object not found! Check the id and corrrect it',category="success")
-
+        return redirect(url_for("Manage_Members"))
 #Update book issues
 @app.route('/update_issues',methods=['GET','POST'])
 def update_issues():
-    if request.method=="POST":
+    cur=mysql.connection.cursor()
+    data=[request.form['issue_id'],]
+    cur.execute("SELECT* FROM issues WHERE issue_id=%s",data)
+    issue=cur.fetchall()
+    if request.method=="POST" and issue:
         cur=mysql.connection.cursor()
         data=[request.form['issue_id'],]
         id="'{}'".format(data[0])
@@ -466,9 +479,10 @@ def update_issues():
 
         cur.close()
         flash(f'Successfully updated ',category="success")
-        return redirect(url_for("Manage_Members"))
+        return redirect(url_for("Record_issue"))
     else:
         flash(f'Object not found! Check the id and corrrect it',category="success")
+        return redirect(url_for("Record_issue"))
 
 #Delete a table for books
 @app.route('/delete',methods=['GET','POST'])
@@ -511,7 +525,7 @@ def delete_row():
     if request.method=="POST":
         cur=mysql.connection.cursor()
         data=[request.form['book_id'],]
-        cur.execute("SELECT* FROM BOOKS WHERE book_id=%s",data)
+        cur.execute("SELECT* FROM books WHERE book_id=%s",data)
         book=cur.fetchall()
         mysql.connection.commit()
         if book:
@@ -534,12 +548,12 @@ def delete_product():
     if request.method=="POST":
         cur=mysql.connection.cursor()
         data=[request.form['product_id'],]
-        cur.execute("SELECT* FROM products WHERE book_id=%s",data)
+        cur.execute("SELECT* FROM products WHERE roduct_id=%s",data)
         book=cur.fetchall()
         mysql.connection.commit()
         if book:
             data=[request.form['product_id'],]
-            query="DELETE FROM products WHERE product_id=%s"
+            query="DELETE FROM products WHERE roduct_id=%s"
             cur.execute(query,data)
             mysql.connection.commit()
             flash(f'deleted',category="success")
@@ -555,7 +569,7 @@ def delete_member():
     if request.method=="POST":
         cur=mysql.connection.cursor()
         data=[request.form['member_id'],]
-        cur.execute("SELECT* FROM MEMBERS WHERE member_id=%s",data)
+        cur.execute("SELECT* FROM members WHERE member_id=%s",data)
         member=cur.fetchall()
         mysql.connection.commit()
         if member:
@@ -563,7 +577,7 @@ def delete_member():
             mysql.connection.commit()
             issue=cur.fetchone()
             if issue:
-                flash("The mamber has a book! cant delete untill the book is returned",category="success")
+                flash("The member has a book! cant delete untill the book is returned",category="success")
                 return redirect(url_for('Issues'))
             query="DELETE FROM members WHERE member_id=%s"
             cur.execute(query,data)
@@ -621,7 +635,7 @@ def page():
 @app.route('/products',methods=["GET","POST"])
 def display_products():
     cur=mysql.connection.cursor()
-    cur.execute("SELECT* FROM PRODUCTS INNER JOIN SUPPLIERS")
+    cur.execute("SELECT* FROM products INNER JOIN suplliers")
     mysql.connection.commit()
     products=cur.fetchall()
     if products:
@@ -636,7 +650,7 @@ def p_description():
     
         form=Member()
         book=Book()
-        query="select product_description,product_name, product_id,product_price from products WHERE product_id='f790'"
+        query="select product_description,product_name, roduct_id,product_price from products WHERE roduct_id='P1'"
         cur=mysql.connection.cursor()
         cur.execute(query)
         mysql.connection.commit()
@@ -644,7 +658,7 @@ def p_description():
         product_details=product[0]
         name= product_details['product_name']
         d= product_details['product_description']
-        p_id=product_details['product_id']
+        p_id=product_details['roduct_id']
         p='{}{}'.format("$",product_details['product_price'])
         return  render_template("product.html",product=d,id=p_id,price=p,name=name,form=form,book=book)
 #Add a book to display
@@ -668,14 +682,23 @@ def add_to_display():
 def new_produc():
         if request.method=='POST':
             data=(request.form['product_id'],request.form['product_name'],request.form['product_description'],request.form['price'],request.form['product_category'])
-            query="INSERT INTO Products(product_id,product_name,product_description,product_price,product_category)VALUES(%s,%s,%s,%s,%s)"
+            id=[request.form['product_id'],]
+            query="INSERT INTO products(roduct_id,product_name,product_description,product_price,product_category)VALUES(%s,%s,%s,%s,%s)"
             #adding into auto incremented column tables needs the added columns specified
             cur=mysql.connection.cursor()
-            cur.execute(query,data)
+            cur.execute("SELECT *from products WHERE roduct_id=%s",id)
             mysql.connection.commit()
-            cur.close()
-            flash(f'product added successfully!' ,category='success')
-            return redirect(url_for("display_products"))
+            exist=cur.fetchall()
+            if exist:
+                flash(f'Product already exists!',category="danger")
+                return redirect(url_for("display_products"))
+            else:
+                cur.execute(query,data)
+                mysql.connection.commit()
+                cur.close()
+                
+                flash(f'product added successfully!' ,category='success')
+                return redirect(url_for("display_products"))
         else:
             flash(f'Failed to add product!',category='danger')
             return redirect(url_for("display_products"))
@@ -745,26 +768,26 @@ def reserve():
             book=cur.fetchall()
             h=book[0]
             k=h['status']
-            if k==True:
+            if k==False:
                     #Go and insert the dates 
                 cur.execute("SELECT * FROM members where member_id = %s",m)
                 mysql.connection.commit()
                 member=cur.fetchone()
                 if member:
                 
-                    cur.execute("INSERT INTO ISSUES(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
-                    cur.execute("UPDATE BOOKS SET status='0' WHERE book_id=%s",id)
+                    cur.execute("INSERT INTO issues(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
+                    cur.execute("UPDATE books SET status='1' WHERE book_id=%s",id)
                     mysql.connection.commit()
 
                     return redirect(url_for('Issues'))
                 else:
                     m=[request.form['member_id'],request.form['member_name'],request.form['phone'],]
-                    cur.execute("INSERT INTO MEMBERS(member_id,member_name,member_phone) VALUES (%s,%s,%s)",m)
-                    cur.execute("INSERT INTO ISSUES(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
-                    cur.execute("UPDATE BOOKS SET status='0' WHERE book_id=%s",id)
+                    cur.execute("INSERT INTO members(member_id,member_name,member_phone) VALUES (%s,%s,%s)",m)
+                    cur.execute("INSERT INTO issues(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
+                    cur.execute("UPDATE books SET status='1' WHERE book_id=%s",id)
                     mysql.connection.commit()
-                    return redirect(url_for('Issues'))
-            elif k==False:
+                    return redirect(url_for('Member_status'))
+            elif k==True:
                 flash(f"The book has already been lent! choose another one!",category="success")
                 return redirect(url_for('show_books'))
         else:
@@ -783,7 +806,7 @@ def popular_books():
 #Book categories @Novels
 @app.route('/novels',methods=['GET','POST'])
 def novels():
-    query="SELECT* FROM BOOKS WHERE book_category LIKE '%novel%'"
+    query="SELECT* FROM books WHERE book_category LIKE '%novel%'"
     cur=mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -796,7 +819,7 @@ def novels():
 
 @app.route('/journals' , methods=['GET','POST'])
 def journals():
-    query="SELECT* FROM BOOKS WHERE book_category LIKE '%journal%'"
+    query="SELECT* FROM books WHERE book_category LIKE '%journal%'"
     cur=mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -811,7 +834,7 @@ def journals():
 
 @app.route('/Poetic' , methods=['GET','POST'])
 def poems():
-    query="SELECT* FROM BOOKS WHERE book_category LIKE '%poet%'"
+    query="SELECT* FROM books WHERE book_category LIKE '%poet%'"
     cur=mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -823,7 +846,7 @@ def poems():
         return redirect(url_for('show_books_users'))
 @app.route('/magazines' , methods=['GET','POST'])
 def magazines():
-    query="SELECT* FROM BOOKS WHERE book_category LIKE '%magazine%'"
+    query="SELECT* FROM WHERE book_category LIKE '%magazine%'"
     cur=mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -835,7 +858,7 @@ def magazines():
         return redirect(url_for('show_books_users'))
 @app.route('/issue',methods=['GET','POST'])
 def Issues():
-    query="SELECT issues.book_id,issues.issue_id,issues.member_id,admin.name,members.member_name,members.member_phone,issues.penalty,issues.date_lent,issues.date_returned,books.book_name,books.author,books.book_id FROM ISSUES INNER JOIN BOOKS ON issues.book_id=books.book_id INNER JOIN ADMIN ON issues.staff_id=admin.admin_id INNER JOIN MEMBERS ON members.member_id=issues.member_id"
+    query="SELECT issues.book_id,issues.issue_id,issues.member_id,admin.name,members.member_name,members.member_phone,issues.penalty,issues.date_lent,issues.date_returned,books.book_name,books.author,books.book_id FROM issues INNER JOIN books ON issues.book_id=books.book_id INNER JOIN admin ON issues.staff_id=admin.admin_id INNER JOIN members ON members.member_id=issues.member_id"
     cur=mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -860,34 +883,36 @@ def Record_issue():
         mysql.connection.commit()
         book=cur.fetchone()
         k=book['status']
-        if k==True:
+        if k==False:
                     #Go and insert the dates 
             cur.execute("SELECT * FROM members where member_id = %s",m)
             mysql.connection.commit()
             member=cur.fetchone()
             if member:
                 
-                cur.execute("INSERT INTO ISSUES(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
-                cur.execute("UPDATE BOOKS SET status='0' WHERE book_id=%s",id)
+                cur.execute("INSERT INTO issues(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
+                cur.execute("UPDATE books SET status='0' WHERE book_id=%s",id)
                 mysql.connection.commit()
 
                 return redirect(url_for('Issues'))
             else:
                  m=[request.form['member_id'],request.form['member_name'],request.form['phone'],]
-                 cur.execute("INSERT INTO MEMBERS(member_id,member_name,member_phone) VALUES (%s,%s,%s)",m)
-                 cur.execute("INSERT INTO ISSUES(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
-                 cur.execute("UPDATE BOOKS SET status='0' WHERE book_id=%s",id)
+                 cur.execute("INSERT INTO members(member_id,member_name,member_phone) VALUES (%s,%s,%s)",m)
+                 cur.execute("INSERT INTO issues(date_lent,date_returned,penalty,staff_id,book_id,member_id) VALUES (%s,%s,%s,%s,%s,%s)",data)
+                 cur.execute("UPDATE books SET status='0' WHERE book_id=%s",id)
                  mysql.connection.commit()
                  return redirect(url_for('Issues'))
-        elif k==False:
+        elif k==True:
             flash(f"The book has already been lent! choose another one!",category="success")
             return redirect(url_for('show_books'))
         else:
             flash(f'Book is not availabe! choose another one here',category="success")
             return redirect(url_for('show_books'))
+
+#books status
 @app.route('/book_status',methods=['GET','POST'])
 def Member_status():
-    query="SELECT issues.book_id,books.status,issues.member_id,members.member_name,issues.penalty,issues.date_lent,issues.date_returned,books.book_name,books.author,books.book_id FROM ISSUES INNER JOIN BOOKS ON issues.book_id=books.book_id INNER JOIN members ON issues.member_id=members.member_id"
+    query="SELECT issues.book_id,books.status,issues.member_id,members.member_name,issues.penalty,issues.date_lent,issues.date_returned,books.book_name,books.author,books.book_id FROM issues INNER JOIN books ON issues.book_id=books.book_id INNER JOIN members ON issues.member_id=members.member_id"
     cur=mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -913,15 +938,16 @@ def buy_product():
             if form.validate_on_submit:
                 if request.method=='POST':
                     data0=[request.form['phone'],]
-                    data1=[request.form['p_id'],request.form['method'],request.form['method']]
+                    data1=[request.form['customer_id'],request.form['p_id'],request.form['method'],request.form['items']]
                     data2=[request.form['customer_name'],
                     request.form['phone'],request.form['email'],request.form['customer_id']]
-                    query1="INSERT INTO TRANSACTIOS(product_id,method_of_payment,items) VALUES(%s,%s,%s)"
-                    query2="INSERT INTO CUSTOMERS(customer_name,phone,email,customer_id) VALUES(%s,%s,%s,%s)"
-                    query3="SELECT* FROM PRODUCTS WHERE product_id=%s"
+                    query1="INSERT INTO transactions(customer_id,roduct_id,method_of_payment,items,date_done,admin_id) VALUES(%s,%s,%s,%s,'2021-07-02','A12')"
+                    query2="INSERT INTO customers(customer_name,phone,email,customer_id) VALUES(%s,%s,%s,%s)"
+                    query3="SELECT* FROM products WHERE roduct_id=%s"
                     cur=mysql.connection.cursor()
-                    cur.execute(query3,data0)
                     cur.execute(query2,data2)
+                    cur.execute(query1,data1)
+                    cur.execute(query3,data0)
                     mysql.connection.commit()
                     id=cur.fetchone()
                     if id:

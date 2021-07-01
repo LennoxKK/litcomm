@@ -19,6 +19,8 @@
             padding:0;
             box-sizing:border-box;
             font-family: sans-serif;
+            font-size: 21px;
+
         }
         input{
             display:none;
@@ -91,7 +93,7 @@
             margin:auto;
             display:grid;
             grid-template-columns: repeat(4,1fr);
-            grid-gap:60px;
+            grid-gap:80px;
         }
         .pic{
             position:relative;
@@ -108,7 +110,7 @@
             transition:.5s;
         }
         .pic::before{
-            content: "photo gallery";
+            content: "read me";
             position: absolute;
             top: 50%;
             left: 50%;
@@ -309,81 +311,82 @@
     <input type="radio" name="photos" id="check3">
     <input type="radio" name="photos" id="check4">
     <div class="container">
-        <h1>OUR PRODUCTS HERE, WELCOME!</h1>
+        <h1>OUR BOOKS HERE, WELCOME!</h1>
         <div class="top-content">
-            <h3>Photo gallery</h3>
+            <h3>POPULAR BOOKS</h3>
             <label for="check1">All BOOKS</label>
             <label for="check2">POETRY</label>
             <label for="check3">Novels</label>
             <label for="check4">Journals</label>
+            <a href="/home"> HOME</a>
         </div>
 
         <div class="photo-gallery">
             <div class="pic pen">
                 <img src="static/img/background.jpg">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
-                    ></i>description  .</a>POETRY BOOK</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
-            </div>
+                    ></i>description  .</a>POETRY </p>
+                    <p><a href="/book_status">Reserve</a></p>
+                </div>
             <div class="pic diary">
                 <img src="static/img/libra1.jpg">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
                     ></i>description  .</a>Short story</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
            <div class="pic diary">
                 <img src="static/img/inward.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
                     ></i>description  .</a>Novel</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic sticky">
                 <img src="static/img/poetry.jpg">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
                     ></i>description  .</a>POEMS</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic sticky">
                 <img src="static/img/best.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
-                    ></i>description  .</a>POETRY BOOK</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    ></i>description  .</a>POETRY</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
            <div class="pic pen">
                 <img src="static/img/holybible.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
-                    ></i>description  .</a>POETRY BOOK</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    ></i>description  .</a>POETRY</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic diary">
                 <img src="static/img/poetry.jpg">
                  <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
-                    ></i>description  .</a>POETRY BOOK</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    ></i>description  .</a>POETRY </p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic sticky">
                 <img src="static/img/life.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
-                    ></i>description  .</a>LIFE BOOK</p>
-                    <p><a href="#">BUY  .</a>$400.00</p>
+                    ></i>description  .</a>LIFE</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic pen">
                 <img src="static/img/life.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
                     ></i>description  .</a>LIFE</p>
-                    <p><a href="#">BUY  .</a>{{price}}</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic pen">
                 <img src="static/img/life.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
                     ></i>description  .</a>LIFE</p>
-                    <p><a href="#">BUY  .</a>{{price}}</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
             <div class="pic pen">
                 <img src="static/img/life.png">
                 <p><a href="#description" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"
                     ></i>description  .</a>LIFE</p>
-                    <p><a href="#">BUY  .</a>{{price}}</p>
+                    <p><a href="/book_status">Reserve</a></p>
             </div>
 
         </div>
