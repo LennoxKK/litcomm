@@ -218,18 +218,33 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         if form.email and form.username and form.password and form.confirm_password and request.method == 'POST':
-            email=request.form['email']
-            username=request.form['username']
+            data0=[request.form['username'],]
+            data1=[request.form['email'],]
             p=request.form['password']
             password=generate_password_hash(request.form['password'])
-            data=(username,email,password,p)
+            data=(request.form['username'],request.form['email'],password,p)
             query="INSERT INTO accounts(username,email,password1,password) VALUES (%s,%s,%s,%s)"
             cur = mysql.connection.cursor()
-            cur.execute(query,data)
+            cur.execute("SELECT* FROM accounts WHERE username=%s ",data0)
             mysql.connection.commit()
-            cur.close()
-            flash(f'account created successfully! for {form.username.data}',category='success')
-            return redirect('login')
+            accept=cur.fetchall()
+            if accept:
+                flash(f'username already exists! just login',category='danger')
+                return redirect(url_for('login'))
+            else:
+                cur.execute("SELECT* FROM accounts WHERE email=%s ",data1)
+                mysql.connection.commit()
+                accept1=cur.fetchall()
+                if accept1:
+                    flash(f'account already exists! check your user name and login',category='danger')
+                    return redirect(url_for('login'))
+                else:
+                    cur.execute(query,data)
+                    mysql.connection.commit()
+
+                    cur.close()
+                    flash(f'account created successfully! for {form.username.data}',category='success')
+                    return redirect('login')
         else:
             flash(f' Invalid details!',category='danger')
     return render_template('register.html',form=form)
